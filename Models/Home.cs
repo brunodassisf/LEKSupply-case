@@ -11,15 +11,33 @@ namespace LEKSupply.Models
 
     public class Listas
     {
-        public string[]? label { get; set; }
-        public int[]? data { get; set; }
+        public string[]? Label { get; set; }
+        public int[]? Data { get; set; }
+
+        public Listas()
+        {
+            Label = Array.Empty<string>();
+            Data = Array.Empty<int>();
+        }
 
     }
 
-    public class RetornoLista
+    public class DashboardListas
     {
-        public List<int>? data { get; set; }
-        public List<string>? label { get; set; }
+        public Listas PorMes { get; set; }
+        public Listas PorMercadoria { get; set; }
+
+        public DashboardListas()
+        {
+            this.PorMes = new Listas();
+            this.PorMercadoria = new Listas();
+        }
+    }
+
+    public class CountMercadoriasRetorno
+    {
+        public List<int>? Data { get; set; }
+        public List<string>? Label { get; set; }
 
     }
 

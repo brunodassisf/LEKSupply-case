@@ -23,7 +23,7 @@ namespace LEKSupply.Models
         [Column("IdMercadoria")]
         public int IdMercadoria { get; set; }
 
-        public List<Mercadoria> Mercadorias { get; set; }
+        public List<Mercadoria>? Mercadorias { get; set; }
     }
 
 

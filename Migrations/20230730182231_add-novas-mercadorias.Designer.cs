@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LEKSupply.Migrations
 {
     [DbContext(typeof(LEKSupplyDbContext))]
-    [Migration("20230730052431_add-novas-mercadorias-test-2")]
-    partial class addnovasmercadoriastest2
+    [Migration("20230730182231_add-novas-mercadorias")]
+    partial class addnovasmercadorias
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -102,7 +102,7 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 1,
-                            Codigo = "fec3355a-a6d9-48cf-a0d6-1dd28e9ae26f",
+                            Codigo = "df95ef1a-e596-4647-8f9c-0d9ecd5cde99",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Dell",
                             Nome = "Mouse",
@@ -112,7 +112,7 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 2,
-                            Codigo = "bf551478-2cc6-4f2e-b4a1-15fca0311cca",
+                            Codigo = "ee4bdc3c-5008-4296-8dcc-900c2e0ab603",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Dell",
                             Nome = "Teclado",
@@ -122,7 +122,7 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 3,
-                            Codigo = "3d089885-e41f-4504-a8b2-fec6f18c9e19",
+                            Codigo = "782c0f98-0b8e-421b-b97e-3a4ad474ae57",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Dell",
                             Nome = "Fone de ouvido",
@@ -132,7 +132,7 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 4,
-                            Codigo = "5a46da48-abc4-4e49-82bd-ef922d66e608",
+                            Codigo = "d0d168a2-fe3e-4ca6-b72b-6b2593abaf1f",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Leader",
                             Nome = "Camiseta",
@@ -142,7 +142,7 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 5,
-                            Codigo = "61bd18c0-bd86-4dec-858e-eac8c281f6bb",
+                            Codigo = "9b22dfa0-5915-4d9d-ad6e-f037f74b4e8d",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Leader",
                             Nome = "Bermuda",
@@ -152,7 +152,7 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 6,
-                            Codigo = "1faa9222-1bf6-4fb0-9b8e-f6f97aa52db2",
+                            Codigo = "77afdde1-c198-447b-b4a7-dc1807b50a4e",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Leader",
                             Nome = "Blusa",
@@ -162,7 +162,7 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 7,
-                            Codigo = "db5c069f-e816-4577-8f28-3f4492813ed7",
+                            Codigo = "de441cad-c74b-41df-ad84-8262953928ee",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Hasbro",
                             Nome = "Carrinho de corrrida",
@@ -172,7 +172,7 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 8,
-                            Codigo = "d6ccbfc1-11be-422a-b6cc-f1f7e38631e6",
+                            Codigo = "0d4807b9-4175-4eb3-a077-297e3ba85f20",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Hasbro",
                             Nome = "Boneco de ação",
@@ -182,7 +182,7 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 9,
-                            Codigo = "4b745d70-bfd0-42f8-9f56-2584fa253d61",
+                            Codigo = "9fc5cf5c-6893-4dea-97fd-72ea5a47c120",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Hasbro",
                             Nome = "Casinha de brinquedo",
@@ -192,7 +192,7 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 10,
-                            Codigo = "1cd7dcd2-4205-4cb7-810d-9a814d46a747",
+                            Codigo = "5fbc6410-a651-49f8-accc-edb714752cff",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Lays",
                             Nome = "Batatatinhas",
@@ -202,7 +202,7 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 11,
-                            Codigo = "9364137a-8f25-4265-85cb-f4e417c40210",
+                            Codigo = "2efa1455-3775-4475-b405-922c63817b88",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Nestle",
                             Nome = "kit kat",
@@ -212,7 +212,7 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 12,
-                            Codigo = "a406cafe-afa4-4b14-9502-5a8ddfc70c6c",
+                            Codigo = "7924e2b2-6008-48de-9c6d-30ec7158a33c",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Lacta",
                             Nome = "Sonho de Valsa",
@@ -222,7 +222,7 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 13,
-                            Codigo = "02d3d52d-95bc-43ee-a4d1-df2d476ae786",
+                            Codigo = "c9a3d3eb-a623-476b-ad52-a121b3697b96",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Philips",
                             Nome = "Lampada",
@@ -232,7 +232,7 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 14,
-                            Codigo = "8e68869d-b349-4989-804e-944c7cc5e084",
+                            Codigo = "9c785acf-ab08-44fd-9b3f-f6e9a2ef7bcd",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Pial",
                             Nome = "Tomada",
@@ -242,7 +242,7 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 15,
-                            Codigo = "1ac1de3b-22c6-4566-b05a-577375d2f49c",
+                            Codigo = "894b23c3-834b-458c-98cc-8a3456aa4a1c",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Dell",
                             Nome = "Gabinete desktop",
@@ -252,7 +252,7 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 16,
-                            Codigo = "82006ad0-b9c6-40bb-bc6f-b4e0a02645df",
+                            Codigo = "ee638f56-7250-413f-a020-80b2d654ca83",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Dell",
                             Nome = "Microfone",
@@ -262,7 +262,7 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 17,
-                            Codigo = "1c18de2d-d3e2-41d9-8c65-e74781505c16",
+                            Codigo = "102ae8db-62c5-446a-a032-c572a7ad419c",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Dell",
                             Nome = "Monitor",
@@ -272,7 +272,7 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 18,
-                            Codigo = "16705546-d645-4942-9b87-48b2e29cc733",
+                            Codigo = "057ae035-443e-404d-9467-e61d1b07aacd",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Dell",
                             Nome = "Processador intel",
@@ -282,7 +282,7 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 19,
-                            Codigo = "b97a1305-0288-4792-9bf1-13133daa9965",
+                            Codigo = "349d8196-d4cb-45d7-a727-3bc7e3e1206e",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Dell",
                             Nome = "Placa de video",
@@ -292,7 +292,7 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 20,
-                            Codigo = "c083bc88-7a85-4477-bad0-5a32095307bd",
+                            Codigo = "023a9af9-60ef-4bc3-ad73-4b66f6c88492",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Leader",
                             Nome = "Casado",
@@ -302,12 +302,102 @@ namespace LEKSupply.Migrations
                         new
                         {
                             Id = 21,
-                            Codigo = "3ee1c17e-e893-470e-bb78-c5da55ee59f5",
+                            Codigo = "37d42d04-3e4a-417d-896a-2c49f107d4d4",
                             Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
                             Fabricante = "Leader",
                             Nome = "Calça jeans",
                             Status = "A",
                             Tipo = "Roupas"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Codigo = "82c5e39e-aa05-4d2e-a9b2-a9db82d48740",
+                            Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
+                            Fabricante = "Fashion Clothing",
+                            Nome = "Camiseta Listrada",
+                            Status = "A",
+                            Tipo = "Roupas"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Codigo = "84449487-eab9-40ba-86be-6e276d40d8a1",
+                            Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
+                            Fabricante = "TechCom",
+                            Nome = "Smartphone Galaxy",
+                            Status = "A",
+                            Tipo = "Eletrônicos"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Codigo = "6a9afac4-cb96-4d44-ace1-e72b8f5dd5d3",
+                            Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
+                            Fabricante = "BrincaBem",
+                            Nome = "Carrinho de Controle Remoto",
+                            Status = "A",
+                            Tipo = "Brinquedos"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Codigo = "f685cab9-db61-4522-a789-59af2f724041",
+                            Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
+                            Fabricante = "Saboroso Foods",
+                            Nome = "Biscoitos Deliciosos",
+                            Status = "A",
+                            Tipo = "Alimentos"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Codigo = "00f8ae5b-4899-4368-a2b2-f02059a1bd9b",
+                            Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
+                            Fabricante = "CasaNova Supplies",
+                            Nome = "Tinta para Parede",
+                            Status = "A",
+                            Tipo = "Materiais de construção"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Codigo = "b070a959-8860-41ba-a709-6eaf605bd10d",
+                            Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
+                            Fabricante = "Fashion Deluxe",
+                            Nome = "Jaqueta de Couro",
+                            Status = "A",
+                            Tipo = "Roupas"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Codigo = "7fcaa9e7-8ec6-4170-83d2-5956a9cea554",
+                            Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
+                            Fabricante = "TechGadgets",
+                            Nome = "Smartwatch Fitness",
+                            Status = "A",
+                            Tipo = "Eletrônicos"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Codigo = "94987283-9cf5-4592-b3dc-cd9649eb0440",
+                            Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
+                            Fabricante = "DivertKids",
+                            Nome = "Quebra-Cabeça Colorido",
+                            Status = "A",
+                            Tipo = "Brinquedos"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Codigo = "b99dfe53-e468-442b-9316-dad02cffd197",
+                            Descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ultricies congue. ",
+                            Fabricante = "SweetTreats",
+                            Nome = "Chocolate Cremoso",
+                            Status = "A",
+                            Tipo = "Alimentos"
                         });
                 });
 

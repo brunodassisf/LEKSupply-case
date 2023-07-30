@@ -3,28 +3,31 @@
 @{
     ViewData["Title"] = "Index";
 }
+<div class="d-flex align-items-center gap-2">
+    <a asp-controller="Home" asp-action="Index"><i class="fa-solid fa-circle-chevron-left text-secondary fs-3"></i></a>
+    <h4 class="title">Vitrine</h4>
+</div>
 
-<h1>Index</h1>
-
+<hr />
 
 <div class="row">
     <div class="col-12">
-        <div class="card-group">
+        <div class="d-flex flex-wrap gap-4">
 
             @{
                 foreach (var item in Model.Mercadorias)
                 {
 
-                    <div class="card">
-                  
+                    <div class="card card-vitrine">
+
                         <div class="card-body">
                             <h5 id="id_Nome_@item.Id" class="card-title">@item.Nome</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text">@item.Descricao</p>
                         </div>
                         <div class="card-footer">
-                            <button type="button" class="btn btn-default btn-modal-open" onclick="addCarrinho(@item.Id, @item.Quantidade)">Adicionar</button>
+                            @item.Tipo
                         </div>
-                    </div>  
+                    </div>
 
                 }
 

@@ -64,15 +64,15 @@
         </div>
         <div class="col-12 d-flex flex-wrap gap-3">
             <div class="form-group-flex">
-                <label class="control-label">Mercadoria</label>
+                <label class="control-label fw-bolder">Mercadoria</label>
                 <input class="form-control" readonly id="form-saida-nome" />
             </div>
             <div class="form-group-flex">
-                <label class="control-label">Local</label>
+                <label class="control-label fw-bolder">Local</label>
                 <input class="form-control" readonly id="form-saida-local" />
             </div>
             <div class="form-group-flex">
-                <label asp-for="@Model.Saida.Quantidade" class="control-label"></label>
+                <label asp-for="@Model.Saida.Quantidade" class="control-label fw-bolder"></label>
                 <input asp-for="@Model.Saida.Quantidade" id="form-saida-quantidade" class="form-control" />
                 <span asp-validation-for="@Model.Saida.Quantidade" id="quantidade-error-max" class="text-danger"></span>
             </div>
@@ -91,6 +91,8 @@
     }
 
     <script type="text/javascript">
+
+        $('#form-saida-quantidade').val(0);
 
         $('#selecionar-outra-entrada').click(() => {
             $('#table-entradas').removeClass('d-none');
@@ -114,10 +116,11 @@
             $('#form-valid').removeClass('d-none');
         }
 
-        // var selectEntrada = $('#select_entrada');
+        var tbody = $('#tbody-entradas');
 
         function buscarEntradas(id) {
             $("#form-saida-idMercadoria").val('')
+            
             if (id !== "") {
                 var url = window.location.origin;
                 $.ajax({
@@ -126,10 +129,9 @@
                     dataType: 'json',
                     success: function (data) {
                         if (data.length > 0) {
-                            var tbody = $('#tbody-entradas');
+                            $("#alert-sem-entradas").addClass('d-none');
                             tbody.empty();
                             $("#form-saida-idMercadoria").val(id)
-
                             $.each(data, function (index, opcao) {
 
                                 var novaTr = $('<tr>');
@@ -159,9 +161,9 @@
                                 tbody.append(novaTr);
 
                             });
-
                         }
                         else {
+                            tbody.empty();
                             $('#alert-sem-entradas').removeClass('d-none');
                         }
                     },
@@ -171,8 +173,6 @@
                 });
             }
         }
-
-
 
     </script>
 }

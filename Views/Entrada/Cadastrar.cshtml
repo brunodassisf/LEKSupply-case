@@ -32,7 +32,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label asp-for="@Model.IdMercadoria" class="control-label"></label>
+                    <label asp-for="@Model.IdMercadoria" class="control-label fw-bolder"></label>
                     <select asp-for="@Model.IdMercadoria" class="form-select" aria-label="Default select example">
                         <option selected value="">Selecione uma mercadoria...</option>
                         @foreach (var mercadoria in @Model.Mercadorias)
@@ -42,17 +42,10 @@
                     </select>
                     <span asp-validation-for="@Model.IdMercadoria" class="text-danger"></span>
                 </div>
-            </div>
+            </div>     
             <div class="col-md-4">
                 <div class="form-group">
-                    <label asp-for="@Model.Quantidade" class="control-label"></label>
-                    <input asp-for="@Model.Quantidade" class="form-control" value="" />
-                    <span asp-validation-for="@Model.Quantidade" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label asp-for="@Model.Local" class="control-label"></label>
+                    <label asp-for="@Model.Local" class="control-label fw-bolder"></label>
                     <select asp-for="@Model.Local" class="form-select" aria-label="Default select example">
                         <option selected value="">Selecione uma Localidade</option>
                         @foreach (var local in listaEndereco)
@@ -61,6 +54,13 @@
                         }
                     </select>
                     <span asp-validation-for="@Model.Local" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="@Model.Quantidade" class="control-label fw-bolder"></label>
+                    <input asp-for="@Model.Quantidade" class="form-control" value="" />
+                    <span asp-validation-for="@Model.Quantidade" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group mt-5 col-md-12">
@@ -76,4 +76,11 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+
+    <script type="text/javascript">
+
+        $('#IdMercadoria').val("");
+        $('#Local').val("");
+
+    </script>
 }

@@ -81,3 +81,7 @@ body {
     flex: 1 0 200px;
     height: 62px;
 }
+
+.card-vitrine {
+    flex: 1 0 350px !important;
+}

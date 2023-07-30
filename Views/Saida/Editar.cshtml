@@ -16,6 +16,7 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="@Model.Saida.Id" />
     <input type="hidden" asp-for="@Model.Saida.IdEntrada" />
+    <input type="hidden" asp-for="@Model.Saida.IdMercadoria" />
 
     <div class="col-md-6">
         <h5>Em Estoque</h5>
@@ -28,6 +29,10 @@
         <div class="form-group">
             <label asp-for="@Model.Saida.Nome" class="control-label fw-bolder"></label>
             <input asp-for="@Model.Saida.Nome" readonly class="form-control" />
+        </div> 
+        <div class="form-group">
+            <label asp-for="@Model.Saida.Local" class="control-label fw-bolder"></label>
+            <input asp-for="@Model.Saida.Local" readonly class="form-control" />
         </div>
 
         <div class="form-group">

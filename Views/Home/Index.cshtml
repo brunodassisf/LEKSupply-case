@@ -24,22 +24,28 @@
         <canvas id="chartMercadorias"></canvas>
     </div>
     <hr class="my-4" />
-    <div class="col-md-8">
-        <canvas id="chartEntradas"></canvas>
-    </div>
-    <div class="col-md-4 pt-5">
+    <div class="col-md-12 pt-5">
         <div class="card border-success mb-3 border-2 dashboard-count-flex">
             <div class="card-header fw-bolder d-flex justify-content-around fs-3"><span>Entradas</span><span>@Model.Entradas.Count</span></div>
         </div>
     </div>
+    <div class="col-md-6">
+        <canvas id="chartEntradasPorMes"></canvas>
+    </div>
+    <div class="col-md-6">
+        <canvas id="chartEntradasPorMercadoria"></canvas>
+    </div>
     <hr class="my-4" />
-    <div class="col-md-4 pt-5">
+    <div class="col-md-12 pt-5">
         <div class="card border-danger mb-3 border-2 dashboard-count-flex">
             <div class="card-header fw-bolder d-flex justify-content-around fs-3"><span>Saida</span><span>@Model.Saidas.Count</span></div>
         </div>
     </div>
-    <div class="col-md-8">
-        <canvas id="chartSaida"></canvas>
+    <div class="col-md-6">
+        <canvas id="chartSaidasPorMes"></canvas>
+    </div>  
+    <div class="col-md-6">
+        <canvas id="chartSaidasPorMercadoria"></canvas>
     </div>
 </div>
 
@@ -49,9 +55,12 @@
     }
 
     <script>
-        const ctxEntrada = document.getElementById('chartEntradas');
         const ctxMercadoria = document.getElementById('chartMercadorias');
-        const ctxSaida = document.getElementById('chartSaida');
+        const ctxEntradaPorMes = document.getElementById('chartEntradasPorMes');
+        const ctxEntradaPorMercadoria = document.getElementById('chartEntradasPorMercadoria');  
+        const ctxSaidaPorMes = document.getElementById('chartSaidasPorMes');
+        const ctxSaidaPorMercadoria = document.getElementById('chartSaidasPorMercadoria');
+       
 
         function renderChart(ctx, data, color, text) {
             return new Chart(ctx, {
@@ -83,9 +92,13 @@
                 url: `${url}/dashboard`,
                 dataType: 'json',
                 success: function (data) {
-                    renderChart(ctxEntrada, data.entrada, '#198754', 'Entradas');
+
                     renderChart(ctxMercadoria, data.mercadoria, '#ffc107', 'Mercadorias');
-                    renderChart(ctxSaida, data.saida, '#dc3545', 'Saidas');
+                    renderChart(ctxEntradaPorMes, data.entrada.porMes, '#198754', 'Por Mês');
+                    renderChart(ctxEntradaPorMercadoria, data.entrada.porMercadoria, '#198754', 'Por Mercadorias');
+                    renderChart(ctxSaidaPorMes, data.saida.porMes, '#dc3545', 'Por Mês');
+                    renderChart(ctxSaidaPorMercadoria, data.saida.porMercadoria, '#dc3545', 'Por Mercadorias');
+
                 },
                 error: function () {
                     alert('Ocorreu um erro na requisição.');

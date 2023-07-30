@@ -8,8 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using LEKSupply.Context;
 using LEKSupply.Models;
 using System.Net.Mime;
-using DocumentFormat.OpenXml.Presentation;
-using DocumentFormat.OpenXml.Office2010.Excel;
 using OfficeOpenXml;
 
 namespace LEKSupply.Controllers
@@ -165,7 +163,7 @@ namespace LEKSupply.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Editar(int id, [Bind("Id,Quantidade,IdEntrada,Status")] Saida saida)
+        public async Task<IActionResult> Editar(int id, [Bind("Id,Quantidade,IdEntrada,Data,Nome,Local,Status,IdMercadoria")] Saida saida)
         {
             var _returnSaida = new Saida();
 
@@ -293,7 +291,7 @@ namespace LEKSupply.Controllers
 
                 MemoryStream stream = new MemoryStream(package.GetAsByteArray());
 
-                string nomeArquivo = "mercadorias.xlsx";
+                string nomeArquivo = $"saida_{Guid.NewGuid()}.xlsx";
 
                 return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", nomeArquivo);
             }

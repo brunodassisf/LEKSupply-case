@@ -129,6 +129,23 @@ namespace LEKSupply
 
 
         }
+
+        public static string ObterNomeMesPorExtenso(int numeroMes)
+        {
+            string[] meses = new string[]
+            {
+            "",
+            "janeiro", "fevereiro", "março", "abril", "maio", "junho",
+            "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"
+            };
+
+            if (numeroMes >= 1 && numeroMes <= 12)
+            {
+                return meses[numeroMes];
+            }
+
+            return string.Empty;
+        }
     }
 
 

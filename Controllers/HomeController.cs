@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Office2010.Excel;
-using LEKSupply.Context;
+﻿using LEKSupply.Context;
 using LEKSupply.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -40,35 +39,37 @@ namespace LEKSupply.Controllers
             {
                 var _listasHome = new Home();
                 var _entradas = await ListarEntradasDashboard(_listasHome);
-                var _saida = await ListarSaidasDashboard(_listasHome);
+                var _saida = await ListarSaidaDashboard(_listasHome);
                 var _mercadorias = await ListarMercadoriasDashboard(_listasHome);
 
-                var retornoAPI = new Dictionary<string, RetornoLista>();
+                var retornoDashboard = new Dictionary<string, object>();
 
-                List<int> dataListEntrada = _entradas.data.ToList();
-                List<string> labelListEntrada = _entradas.label.ToList();
-                List<int> dataListSaida = _saida.data.ToList();
-                List<string> labelListSaida = _saida.label.ToList();
-                List<int> dataListMercadoria = _mercadorias.data.ToList();
-                List<string> labelListMercadoria = _mercadorias.label.ToList();
+                Listas ListEntradaMercadorias = _entradas.PorMercadoria;
+                Listas ListEntradaMes = _entradas.PorMes;  
 
-                retornoAPI["entrada"] = new RetornoLista
+                Listas ListSaidaMercadorias = _saida.PorMercadoria;
+                Listas ListSaidaMes = _saida.PorMes;
+
+                List<int> dataListMercadoria = _mercadorias.Data.ToList();
+                List<string> labelListMercadoria = _mercadorias.Label.ToList();
+
+                retornoDashboard["entrada"] = new DashboardListas
                 {
-                    data = dataListEntrada,
-                    label = labelListEntrada
+                    PorMes = ListEntradaMes,
+                    PorMercadoria = ListEntradaMercadorias
+                };  
+                retornoDashboard["saida"] = new DashboardListas
+                {
+                    PorMes = ListSaidaMes,
+                    PorMercadoria = ListSaidaMercadorias
                 };
-                retornoAPI["saida"] = new RetornoLista
+                retornoDashboard["mercadoria"] = new CountMercadoriasRetorno
                 {
-                    data = dataListSaida,
-                    label = labelListSaida
-                };
-                retornoAPI["mercadoria"] = new RetornoLista
-                {
-                    data = dataListMercadoria,
-                    label = labelListMercadoria
+                    Data = dataListMercadoria,
+                    Label = labelListMercadoria
                 };
 
-                return new JsonResult(retornoAPI);
+                return new JsonResult(retornoDashboard);
             }
             catch
             {
@@ -76,50 +77,104 @@ namespace LEKSupply.Controllers
             }
         }
 
-        public async Task<Listas> ListarEntradasDashboard(Home _listasHome)
+        public async Task<DashboardListas> ListarEntradasDashboard(Home _listasHome)
         {
-            var _lista = new Listas();
+            var _listaPorMercadoria = new Listas();
+            var _listaPorMes = new Listas();
+            var _dashboardLista = new DashboardListas();
+
             _listasHome.Entradas = await _context.Entrada.ToListAsync();
-            Dictionary<string, int> entradasAgrupadas = new Dictionary<string, int>();
+
+            Dictionary<string, int> entradasAgrupadasPorMes = new Dictionary<string, int>();
+            Dictionary<string, int> entradasAgrupadasPorMercadoria = new Dictionary<string, int>();
 
             foreach (var e in _listasHome.Entradas)
             {
-                if (entradasAgrupadas.ContainsKey(e.Local))
+                DateTime data = DateTime.Parse(e.Data);
+                int _mes = data.Month;
+                string _mesExtenso = configHost.ObterNomeMesPorExtenso(_mes);
+
+                if (entradasAgrupadasPorMes.ContainsKey(_mesExtenso))
                 {
-                    entradasAgrupadas[e.Local] += e.Quantidade;
+                    entradasAgrupadasPorMes[_mesExtenso] += e.Quantidade;
+
                 }
                 else
                 {
-                    entradasAgrupadas.Add(e.Local, e.Quantidade);
+                    entradasAgrupadasPorMes.Add(_mesExtenso, e.Quantidade);
                 }
+
+                if (entradasAgrupadasPorMercadoria.ContainsKey(e.Nome))
+                {
+                    entradasAgrupadasPorMercadoria[e.Nome] += e.Quantidade;
+
+                }
+                else
+                {
+                    entradasAgrupadasPorMercadoria.Add(e.Nome, e.Quantidade);
+                }
+
             }
-            _lista.label = entradasAgrupadas.Keys.ToArray();
-            _lista.data = entradasAgrupadas.Values.ToArray();
 
-            return _lista;
-        }
+            _listaPorMercadoria.Label = entradasAgrupadasPorMercadoria.Keys.ToArray();
+            _listaPorMercadoria.Data = entradasAgrupadasPorMercadoria.Values.ToArray();
+            _listaPorMes.Label = entradasAgrupadasPorMes.Keys.ToArray();
+            _listaPorMes.Data = entradasAgrupadasPorMes.Values.ToArray();
 
-        public async Task<Listas> ListarSaidasDashboard(Home _listasHome)
+            _dashboardLista.PorMes = _listaPorMes;
+            _dashboardLista.PorMercadoria = _listaPorMercadoria;
+
+            return _dashboardLista;
+        } 
+        
+        public async Task<DashboardListas> ListarSaidaDashboard(Home _listasHome)
         {
-            var _lista = new Listas();
+            var _listaPorMercadoria = new Listas();
+            var _listaPorMes = new Listas();
+            var _dashboardLista = new DashboardListas();
+
             _listasHome.Saidas = await _context.Saida.ToListAsync();
-            Dictionary<string, int> saidaAgrupadas = new Dictionary<string, int>();
+
+            Dictionary<string, int> saidasAgrupadasPorMes = new Dictionary<string, int>();
+            Dictionary<string, int> saidasAgrupadasPorMercadoria = new Dictionary<string, int>();
 
             foreach (var e in _listasHome.Saidas)
             {
-                if (saidaAgrupadas.ContainsKey(e.Local))
+                DateTime data = DateTime.Parse(e.Data);
+                int _mes = data.Month;
+                string _mesExtenso = configHost.ObterNomeMesPorExtenso(_mes);
+
+                if (saidasAgrupadasPorMes.ContainsKey(_mesExtenso))
                 {
-                    saidaAgrupadas[e.Local] += e.Quantidade;
+                    saidasAgrupadasPorMes[_mesExtenso] += e.Quantidade;
+
                 }
                 else
                 {
-                    saidaAgrupadas.Add(e.Local, e.Quantidade);
+                    saidasAgrupadasPorMes.Add(_mesExtenso, e.Quantidade);
                 }
-            }
-            _lista.label = saidaAgrupadas.Keys.ToArray();
-            _lista.data = saidaAgrupadas.Values.ToArray();
 
-            return _lista;
+                if (saidasAgrupadasPorMercadoria.ContainsKey(e.Nome))
+                {
+                    saidasAgrupadasPorMercadoria[e.Nome] += e.Quantidade;
+
+                }
+                else
+                {
+                    saidasAgrupadasPorMercadoria.Add(e.Nome, e.Quantidade);
+                }
+
+            }
+
+            _listaPorMercadoria.Label = saidasAgrupadasPorMercadoria.Keys.ToArray();
+            _listaPorMercadoria.Data = saidasAgrupadasPorMercadoria.Values.ToArray();
+            _listaPorMes.Label = saidasAgrupadasPorMes.Keys.ToArray();
+            _listaPorMes.Data = saidasAgrupadasPorMes.Values.ToArray();
+
+            _dashboardLista.PorMes = _listaPorMes;
+            _dashboardLista.PorMercadoria = _listaPorMercadoria;
+
+            return _dashboardLista;
         }
 
         public async Task<Listas> ListarMercadoriasDashboard(Home _listasHome)
@@ -139,8 +194,8 @@ namespace LEKSupply.Controllers
                     mercadoriasAgrupadas.Add(e.Tipo, 1);
                 }
             }
-            _lista.label = mercadoriasAgrupadas.Keys.ToArray();
-            _lista.data = mercadoriasAgrupadas.Values.ToArray();
+            _lista.Data = mercadoriasAgrupadas.Values.ToArray();
+            _lista.Label = mercadoriasAgrupadas.Keys.ToArray();
 
             return _lista;
         }

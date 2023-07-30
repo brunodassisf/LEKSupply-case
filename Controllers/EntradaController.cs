@@ -47,7 +47,9 @@ namespace LEKSupply.Controllers
         public IActionResult Cadastrar()
         {
             var _entradaRoot = configHost.preencherDados(_context);
-        
+            _entradaRoot.IdMercadoria = 0;
+            _entradaRoot.Local = "";
+
             return View(_entradaRoot);
         }     
          
@@ -79,6 +81,8 @@ namespace LEKSupply.Controllers
                 ViewBag.MsgAlert = _ex.Message;
             }
             var _entradaRoot = configHost.preencherDados(_context);
+            _entradaRoot.IdMercadoria = 0;
+            _entradaRoot.Local = "";
 
             return View(_entradaRoot);
 
@@ -204,7 +208,7 @@ namespace LEKSupply.Controllers
 
                 MemoryStream stream = new MemoryStream(package.GetAsByteArray());
 
-                string nomeArquivo = "mercadorias.xlsx";
+                string nomeArquivo = $"entrada_{Guid.NewGuid()}.xlsx";
 
                 return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", nomeArquivo);
             }

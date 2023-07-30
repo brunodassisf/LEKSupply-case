@@ -195,7 +195,7 @@ namespace LEKSupply.Controllers
 
                 MemoryStream stream = new MemoryStream(package.GetAsByteArray());
 
-                string nomeArquivo = "mercadorias.xlsx";
+                string nomeArquivo = $"mercadoria_{Guid.NewGuid()}.xlsx";
 
                 return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", nomeArquivo);
             }
