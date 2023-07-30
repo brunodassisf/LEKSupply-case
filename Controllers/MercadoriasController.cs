@@ -189,7 +189,7 @@ namespace LEKSupply.Controllers
                     worksheet.Cells[linhaAtual, 4].Value = item.Descricao;
                     worksheet.Cells[linhaAtual, 5].Value = item.Fabricante;
                     worksheet.Cells[linhaAtual, 6].Value = item.Tipo;
-                    worksheet.Cells[linhaAtual, 7].Value = item.Status;
+                    worksheet.Cells[linhaAtual, 7].Value = configHost.statusGrid(item.Status);
                     linhaAtual++;
                 }
 
