@@ -1,0 +1,115 @@
+﻿@model IEnumerable<LEKSupply.Models.Entrada>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3>Entrada</h3>
+
+<hr />
+
+@{
+    if (@Model.Count() < 1)
+    {
+        <div class="alert alert-secondary d-flex align-items-center justify-content-around" role="alert">
+            <span>Ainda não existe registro de Entrada cadastrado.</span>
+            <a asp-action="Cadastrar" asp-controller="Entrada" class="btn btn-outline-secondary py-2 px-4">Cadastrar entrada</a>
+        </div>
+    }
+    else
+    {
+
+        <div class="d-flex justify-content-between">
+            <a asp-action="Cadastrar" asp-controller="Entrada" class="btn btn-outline-secondary py-2 px-4">Cadastrar entrada</a>
+            @using (Html.BeginForm("ExportarParaExcelEntrada", "Entrada", FormMethod.Post))
+            {
+                <button type="submit" class="d-flex align-items-center gap-2 btn btn-secondary px-4">
+                    <i class="fa-solid fa-file-csv"></i>
+                    <span>Exportar</span>
+                </button>
+            }
+        </div>
+
+        <table class="table mt-4">
+            <thead class="table-light">
+                <tr>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nome)
+
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Local)
+
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Data)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Quantidade)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="align-middle">
+                        <td>
+                            @{
+                                if (item.Status != "X")
+                                {
+                                    <a asp-action="Editar" asp-route-id="@item.Id" class="text-decoration-none btn btn-outline-secondary  py-1 px-2 rounded">
+                                        <i class="fa-solid fa-pen-to-square mr-1"></i><span>Editar</span>
+                                    </a>
+                                }
+                            }
+                        </td>
+                        <td>
+                            <p class="text-td text-truncate">
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </p>
+                        </td>
+                        <td>
+                            <p class="text-td text-truncate">
+                                @Html.DisplayFor(modelItem => item.Local)
+                            </p>
+                        </td>
+                        <td>
+                            @configHost.formatarDataGrid(item.Data)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantidade)
+                        </td>
+                        <td>
+
+                            @configHost.statusGrid(item.Status)
+
+                        </td>
+
+                        <td>
+                            <a asp-action="Detalhe" asp-route-id="@item.Id" class="text-decoration-none btn btn-outline-secondary  py-2 px-3 rounded">
+                                <i class="fa-solid fa-up-right-from-square"></i>
+                                <span>Detalhe</span>
+                            </a>
+
+                            @{
+                                if (item.Status != "X")
+                                {
+                                    <a asp-action="Deletar" asp-route-id="@item.Id" class="text-decoration-none btn btn-outline-secondary  py-2 px-3 rounded">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                        <span>Delete</span>
+                                    </a>
+                                }
+                            }
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}

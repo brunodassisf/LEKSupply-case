@@ -1,0 +1,102 @@
+﻿@model Home
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@*<div class="d-flex gap-4 flex-wrap">
+    <div class="card border-warning mb-3 border-2 dashboard-count-flex">
+        <div class="card-header d-flex justify-content-around fw-bolder fs-3"><span>Mercadorias</span><span>@Model.Mercadorias.Count</span></div>
+    </div>
+    <div class="card border-danger mb-3 border-2 dashboard-count-flex">
+        <div class="card-header fw-bolder d-flex justify-content-around fs-3"><span>Saidas</span><span>@Model.Saidas.Count</span></div>
+    </div>
+</div>*@
+
+<div class="row">
+    <div class="col-md-4 pt-5">
+        <div class="card border-warning mb-3 border-2 dashboard-count-flex">
+            <div class="card-header fw-bolder d-flex justify-content-around fs-3"><span>Mercadorias</span><span>@Model.Mercadorias.Count</span></div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <canvas id="chartMercadorias"></canvas>
+    </div>
+    <hr class="my-4" />
+    <div class="col-md-8">
+        <canvas id="chartEntradas"></canvas>
+    </div>
+    <div class="col-md-4 pt-5">
+        <div class="card border-success mb-3 border-2 dashboard-count-flex">
+            <div class="card-header fw-bolder d-flex justify-content-around fs-3"><span>Entradas</span><span>@Model.Entradas.Count</span></div>
+        </div>
+    </div>
+    <hr class="my-4" />
+    <div class="col-md-4 pt-5">
+        <div class="card border-danger mb-3 border-2 dashboard-count-flex">
+            <div class="card-header fw-bolder d-flex justify-content-around fs-3"><span>Saida</span><span>@Model.Saidas.Count</span></div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <canvas id="chartSaida"></canvas>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        const ctxEntrada = document.getElementById('chartEntradas');
+        const ctxMercadoria = document.getElementById('chartMercadorias');
+        const ctxSaida = document.getElementById('chartSaida');
+
+        function renderChart(ctx, data, color, text) {
+            return new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.label,
+                    datasets: [{
+                        label: text,
+                        data: data.data,
+                        borderWidth: 2,
+                        backgroundColor: color
+                    }]
+                },
+                responsive: true,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function buscarDadosDashboard() {
+            var url = window.location.origin;
+            $.ajax({
+                type: 'Get',
+                url: `${url}/dashboard`,
+                dataType: 'json',
+                success: function (data) {
+                    renderChart(ctxEntrada, data.entrada, '#198754', 'Entradas');
+                    renderChart(ctxMercadoria, data.mercadoria, '#ffc107', 'Mercadorias');
+                    renderChart(ctxSaida, data.saida, '#dc3545', 'Saidas');
+                },
+                error: function () {
+                    alert('Ocorreu um erro na requisição.');
+                }
+            });
+
+        }
+
+        $(document).ready(function () {
+            buscarDadosDashboard()
+        });
+
+    </script>
+}

@@ -1,0 +1,65 @@
+﻿@model EditarSaida
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<div class="d-flex align-items-center gap-2">
+    <a asp-action="Index"><i class="fa-solid fa-circle-chevron-left text-secondary fs-3"></i></a>
+    <h4 class="title">@ViewData["Title"] Saida</h4>
+</div>
+
+<hr />
+
+
+<form asp-action="Editar" id="form-valid" class="row">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="@Model.Saida.Id" />
+    <input type="hidden" asp-for="@Model.Saida.IdEntrada" />
+
+    <div class="col-md-6">
+        <h5>Em Estoque</h5>
+        <div class="form-group">
+            <label asp-for="@Model.Entrada.Quantidade" id="form-saida-quantidade-referencia" class="control-label fw-bolder"></label>
+            <input asp-for="@Model.Entrada.Quantidade" readonly class="form-control" />
+        </div>
+    </div>
+    <div class="col-md-6 d-flex flex-column gap-3">
+        <div class="form-group">
+            <label asp-for="@Model.Saida.Nome" class="control-label fw-bolder"></label>
+            <input asp-for="@Model.Saida.Nome" readonly class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Saida.Data" class="control-label fw-bolder"></label>
+            <input asp-for="@Model.Saida.Data" readonly class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Saida.Quantidade" class="control-label fw-bolder"></label>
+            <input asp-for="@Model.Saida.Quantidade" id="form-saida-quantidade" class="form-control" />
+            <span asp-validation-for="@Model.Saida.Quantidade" id="quantidade-error-max" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Saida.Status" class="control-label fw-bolder"></label>
+            <select asp-for="@Model.Saida.Status" class="form-select" aria-label="Default select example">
+                <option value="A">Ativo</option>
+                <option value="I">Inativo</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="form-group">
+            <input type="submit" value="Salvar" class="btn btn-primary mt-5 py-3 px-2 w-100" />
+        </div>
+    </div>
+
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

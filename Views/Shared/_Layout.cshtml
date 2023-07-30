@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LEKSupply</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/LEKSupply.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">LEK Supply</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+            </div>
+        </nav>
+    </header>
+
+    <div class="container text-center d-flex justify-content-center my-5 gap-3">
+        <a class="bg-danger text-white text-decoration-none d-flex gap-2 justify-content-center align-items-center py-2 w-25 rounded-3 fs-3" asp-area="" asp-controller="Vitrine" asp-action="Index">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Vitrine</span>
+        </a>
+        <a class="bg-info text-white text-decoration-none d-flex gap-2 justify-content-center align-items-center py-2 w-25 rounded-3 fs-3" asp-area="" asp-controller="Home" asp-action="Index">
+            <i class="fa-solid fa-arrow-trend-up"></i>
+            <span>Estatisticas</span>
+        </a>
+        <a class="bg-warning text-white text-decoration-none d-flex gap-2 justify-content-center align-items-center py-2 w-25 rounded-3 fs-3" asp-area="" asp-controller="Mercadorias" asp-action="Index">
+            <i class="fa-solid fa-star"></i>
+            <span>Mercadorias</span>
+        </a>
+        <a class="bg-success text-white text-decoration-none d-flex gap-2 justify-content-center align-items-center py-2 w-25 rounded-3 fs-3" asp-area="" asp-controller="Entrada" asp-action="Index">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Entrada</span>
+        </a>
+        <a class="bg-danger text-white text-decoration-none d-flex gap-2 justify-content-center align-items-center py-2 w-25 rounded-3 fs-3" asp-area="" asp-controller="Saida" asp-action="Index">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Saida</span>
+        </a>
+    </div>
+
+    <main role="main" class="container">
+        @RenderBody()
+    </main>
+
+
+    <footer class="border-top py-3 mt-3 text-muted">
+        <div class="container">
+            &copy; 2023 - LEKSupply - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-mask/dist/jquery.mask.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

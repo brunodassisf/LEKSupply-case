@@ -1,0 +1,83 @@
+main, html {
+    height: 100%;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 100vh;
+}
+
+.back-icon {
+    padding: 10px 16px;
+    border-radius: 50px;
+    transition: 300ms;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: 600;
+    margin: 0px;
+    line-height: 45px;
+}
+
+
+.back-icon:hover {
+    background-color: #34393d;
+}
+
+.back-icon i {
+    color: white;
+    font-size: 20px;
+}
+
+.btn-action {
+    padding: 15px 20px;
+    width: fit-content;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: 500ms;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+    .btn-action:hover {
+        color: white;
+    }
+
+.input-validation-error {
+    border-color: red;
+}
+
+    .input-validation-error:focus {
+        border-color: red;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgb(255 0 47 / 27%);
+    }
+
+
+.text-td {
+    width: 125px;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    margin-bottom: 0px;
+}
+
+.form-group-flex {
+    flex: 1 0 200px;
+}
+
+.dashboard-count-flex {
+    flex: 1 0 200px;
+    height: 62px;
+}

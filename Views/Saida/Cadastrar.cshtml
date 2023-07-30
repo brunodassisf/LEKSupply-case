@@ -1,0 +1,178 @@
+﻿@model NovaSaida
+@{
+    ViewData["Title"] = "Cadastrar";
+}
+
+<div class="d-flex align-items-center gap-2">
+    <a asp-action="Index"><i class="fa-solid fa-circle-chevron-left text-secondary fs-3"></i></a>
+    <h4 class="title">@ViewData["Title"] Saida</h4>
+</div>
+
+<hr />
+@{
+    if ($"{ViewBag.MsgAlert}" != "")
+    {
+        <div class="alert alert-info d-flex align-items-center justify-content-around" role="alert">
+            @Html.Raw(ViewBag.MsgAlert)
+        </div>
+    }
+}
+
+
+<div class="mb-4" id="select-mercadoria">
+    <label class="control-label fw-bolder">Mercadoria</label>
+    <select class="form-select" onchange="javascript: buscarEntradas(this.value)" aria-label="Default select example">
+        <option selected value="">Selecione uma mercadoria...</option>
+        @foreach (var entrada in @Model.Mercadorias)
+        {
+            <option value="@entrada.Id">@entrada.Nome</option>
+        }
+    </select>
+</div>
+
+<div id="alert-sem-entradas" class="alert alert-warning d-flex align-items-center justify-content-around d-none" role="alert">
+    <span>
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        Não existe entradas cadastradas para essa mercadoria, favor cadastrar uma entrada.
+    </span>
+    <a asp-controller="Entrada" asp-action="Cadastrar" class="btn btn-warning py-2 px-4">Cadastrar entrada</a>
+</div>
+
+<div>
+    <table id="table-entradas" class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Nome</th>
+                <th scope="col">Local</th>
+                <th scope="col">Quantidade</th>
+            </tr>
+        </thead>
+        <tbody id="tbody-entradas">
+        </tbody>
+    </table>
+    <form id="form-valid" class="row d-none" asp-action="Cadastrar">
+        <input type="hidden" id="form-saida-quantidade-referencia" class="d-none" />
+        <input asp-for="@Model.Saida.IdEntrada" type="hidden" id="form-saida-id" class="d-none" />
+        <input asp-for="@Model.Saida.IdMercadoria" type="hidden" id="form-saida-idMercadoria" class="d-none" />
+        <div class="col-12">
+            <div class="d-flex align-items-center gap-3">
+                <i class="fa-solid fa-circle-chevron-left fs-4" id="selecionar-outra-entrada"></i>
+                <h5 class="mb-0">Escolher outra entrada</h5>
+            </div>
+            <hr />
+        </div>
+        <div class="col-12 d-flex flex-wrap gap-3">
+            <div class="form-group-flex">
+                <label class="control-label">Mercadoria</label>
+                <input class="form-control" readonly id="form-saida-nome" />
+            </div>
+            <div class="form-group-flex">
+                <label class="control-label">Local</label>
+                <input class="form-control" readonly id="form-saida-local" />
+            </div>
+            <div class="form-group-flex">
+                <label asp-for="@Model.Saida.Quantidade" class="control-label"></label>
+                <input asp-for="@Model.Saida.Quantidade" id="form-saida-quantidade" class="form-control" />
+                <span asp-validation-for="@Model.Saida.Quantidade" id="quantidade-error-max" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group mt-5 col-md-12">
+            <input type="submit" value="Cadastrar Saida" class="btn btn-success w-100 py-3" id="btn-submit-saida" />
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script type="text/javascript">
+
+        $('#selecionar-outra-entrada').click(() => {
+            $('#table-entradas').removeClass('d-none');
+            $('#form-valid').addClass('d-none');
+            $('#select-mercadoria').removeClass('d-none');
+            $('#form-saida-nome').val('');
+            $('#form-saida-local').val('');
+            $('#form-saida-quantidade').val('');
+        });
+
+        function selecionaEntradaParaSaida(opcao) {
+            var linhaClicada = $(this);
+            $('#form-saida-id').val(linhaClicada.find('td:eq(0)').text());
+            $('#form-saida-nome').val(linhaClicada.find('td:eq(1)').text());
+            $('#form-saida-local').val(linhaClicada.find('td:eq(2)').text());
+            $('#form-saida-quantidade').attr('placeholder', `${linhaClicada.find('td:eq(3)').text()} em estoque`);
+            $('#form-saida-quantidade-referencia').val(linhaClicada.find('td:eq(3)').text());
+
+            $('#select-mercadoria').addClass('d-none');
+            $('#table-entradas').addClass('d-none');
+            $('#form-valid').removeClass('d-none');
+        }
+
+        // var selectEntrada = $('#select_entrada');
+
+        function buscarEntradas(id) {
+            $("#form-saida-idMercadoria").val('')
+            if (id !== "") {
+                var url = window.location.origin;
+                $.ajax({
+                    type: 'Get',
+                    url: `${url}/buscar-entrada/${id}`,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.length > 0) {
+                            var tbody = $('#tbody-entradas');
+                            tbody.empty();
+                            $("#form-saida-idMercadoria").val(id)
+
+                            $.each(data, function (index, opcao) {
+
+                                var novaTr = $('<tr>');
+
+                                var colunaId = $('<td>')
+                                var colunaNome = $('<td>')
+                                var colunalocal = $('<td>')
+                                var colunaQuantidade = $('<td>')
+
+                                var textId = $('<p class="d-none">').text(opcao.id);
+                                var textNome = $('<p class="text-td text-truncate">').text(opcao.nome);
+                                var textLocal = $('<p class="text-td text-truncate">').text(opcao.local);
+                                var testQuantidade = $('<p class="text-td text-truncate">').text(opcao.quantidade);
+
+                                colunaId.append(textId);
+                                colunaNome.append(textNome);
+                                colunalocal.append(textLocal);
+                                colunaQuantidade.append(testQuantidade);
+
+                                novaTr.append(colunaId);
+                                novaTr.append(colunaNome);
+                                novaTr.append(colunalocal);
+                                novaTr.append(colunaQuantidade);
+
+                                novaTr.on('click', selecionaEntradaParaSaida);
+
+                                tbody.append(novaTr);
+
+                            });
+
+                        }
+                        else {
+                            $('#alert-sem-entradas').removeClass('d-none');
+                        }
+                    },
+                    error: function () {
+                        alert('Ocorreu um erro na requisição.');
+                    }
+                });
+            }
+        }
+
+
+
+    </script>
+}

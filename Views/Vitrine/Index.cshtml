@@ -1,0 +1,70 @@
+﻿@model Vitrine
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card-group">
+
+            @{
+                foreach (var item in Model.Mercadorias)
+                {
+
+                    <div class="card">
+                  
+                        <div class="card-body">
+                            <h5 id="id_Nome_@item.Id" class="card-title">@item.Nome</h5>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        </div>
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-default btn-modal-open" onclick="addCarrinho(@item.Id, @item.Quantidade)">Adicionar</button>
+                        </div>
+                    </div>  
+
+                }
+
+            }
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-action" tabindex="-1" role="dialog" aria-labelledby="meuModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Colocar no carinho</h5>
+                <button class="btn" type="button" id="btn-modal-close" data-dismiss="modal" aria-label="Fechar">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>Confirmar colocar no carinho?</h5>
+            </div>
+            <div class="modal-footer">
+                <form asp-action="Deletar" class="w-100">
+                    <input type="submit" value="Confirmar" class="btn btn-default w-100 py-3" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script type="text/javascript">
+        function addCarrinho(_id, _quantidade) {
+            $('#modalLabel').html($('#id_Nome_' + _id).html());
+            console.log(_quantidade);
+        }
+
+    </script>
+}

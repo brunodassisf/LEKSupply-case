@@ -1,0 +1,68 @@
+﻿@model LEKSupply.Models.Mercadoria
+
+@{
+    ViewData["Title"] = "Deletar";
+}
+<div class="d-flex align-items-center gap-2">
+    <a asp-action="Index"><i class="fa-solid fa-circle-chevron-left text-secondary fs-3"></i></a>
+    <h4 class="title">@ViewData["Title"] Mercadoria</h4>
+</div>
+
+<hr />
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Fabricante)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Fabricante)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+    </dl>
+
+    <div>
+        <input type="Button" value="Deletar" class="btn btn-danger w-100 py-3 btn-modal-open" />
+    </div>
+
+    <div class="modal fade" id="modal-action" tabindex="-1" role="dialog" aria-labelledby="meuModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="meuModalLabel">Confirmar delete</h5>
+                    <button class="btn" type="button" id="btn-modal-close" data-dismiss="modal" aria-label="Fechar">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5>Deseja inativar a mercadoria selecionada?</h5>
+                </div>
+                <div class="modal-footer">
+                    <form asp-action="Deletar" class="w-100">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="submit" value="Confirmar" class="btn btn-danger w-100 py-3" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,61 @@
+﻿@model CriarMercadoria
+
+@{
+    ViewData["Title"] = "Cadastrar";
+}
+
+
+<div class="d-flex align-items-center gap-2">
+    <a asp-action="Index"><i class="fa-solid fa-circle-chevron-left text-secondary fs-3"></i></a>
+    <h4 class="title">@ViewData["Title"] Mercadoria</h4>
+</div>
+
+<hr />
+
+<form asp-action="Cadastrar" id="form-valid" class=" row justify-content-around">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label asp-for="@Model.Mercadoria.Nome" class="control-label fw-bolder"></label>
+            <input asp-for="@Model.Mercadoria.Nome" id="Nome" class="form-control" />
+            <span asp-validation-for="@Model.Mercadoria.Nome" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Mercadoria.Fabricante" class="control-label fw-bolder"></label>
+            <input asp-for="@Model.Mercadoria.Fabricante" class="form-control" />
+            <span asp-validation-for="@Model.Mercadoria.Fabricante" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label asp-for="@Model.Mercadoria.Tipo" class="control-label fw-bolder"></label>
+            <select asp-for="@Model.Mercadoria.Tipo" class="form-select" aria-label="Default select example">
+                <option selected value="">Escolha um tipo</option>
+                @foreach (var t in Model.Tipos)
+                {
+                    <option value="@t.tipo">@t.tipo</option>
+                }
+            </select>
+            <span asp-validation-for="@Model.Mercadoria.Tipo" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Mercadoria.Descricao" for="exampleFormControlTextarea1" class="form-label fw-bolder"></label>
+            <textarea asp-for="@Model.Mercadoria.Descricao" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="@Model.Mercadoria.Descricao" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-lg-12 mt-3">
+        <input type="submit" value="Cadastrar" class="btn btn-success w-100 py-3" id="btn-submit" />
+    </div>
+</form>
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

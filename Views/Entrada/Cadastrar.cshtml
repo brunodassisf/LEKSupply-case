@@ -1,0 +1,79 @@
+﻿@model LEKSupply.Models.Movimentar
+@{
+    ViewData["Title"] = "Cadastrar";
+    var listaEndereco = configHost.listaEnderecos();
+}
+
+<div class="d-flex align-items-center gap-2">
+    <a asp-action="Index"><i class="fa-solid fa-circle-chevron-left text-secondary fs-3"></i></a>
+    <h4 class="title">@ViewData["Title"] Entrada</h4>
+</div>
+
+<hr />
+
+@{
+    if ($"{ViewBag.MsgAlert}" != "")
+    {
+        <div class="alert alert-info d-flex align-items-center justify-content-around" role="alert">
+            @Html.Raw(ViewBag.MsgAlert)
+        </div>
+    }
+
+    if (Model.Mercadorias.Count < 1)
+    {
+        <div class="alert alert-secondary d-flex align-items-center justify-content-around" role="alert">
+            <span>Ainda não existe mercadorias cadastradas, por favor cadatre uma para proseeguir.</span>
+            <a asp-action="Cadastrar" asp-controller="Mercadorias" class="btn btn-outline-secondary py-2 px-4">Cadastrar mercadoria</a>
+        </div>
+    }
+    else
+    {
+        <form asp-action="Cadastrar" id="form-valid" class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="@Model.IdMercadoria" class="control-label"></label>
+                    <select asp-for="@Model.IdMercadoria" class="form-select" aria-label="Default select example">
+                        <option selected value="">Selecione uma mercadoria...</option>
+                        @foreach (var mercadoria in @Model.Mercadorias)
+                        {
+                            <option value="@mercadoria.Id">@mercadoria.Nome</option>
+                        }
+                    </select>
+                    <span asp-validation-for="@Model.IdMercadoria" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="@Model.Quantidade" class="control-label"></label>
+                    <input asp-for="@Model.Quantidade" class="form-control" value="" />
+                    <span asp-validation-for="@Model.Quantidade" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="@Model.Local" class="control-label"></label>
+                    <select asp-for="@Model.Local" class="form-select" aria-label="Default select example">
+                        <option selected value="">Selecione uma Localidade</option>
+                        @foreach (var local in listaEndereco)
+                        {
+                            <option value="@local.Nome">@local.Nome</option>
+                        }
+                    </select>
+                    <span asp-validation-for="@Model.Local" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group mt-5 col-md-12">
+                <input type="submit" value="Cadastrar Entrada" class="btn btn-success w-100 py-3" id="btn-submit" />
+            </div>
+        </form>
+    }
+}
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
